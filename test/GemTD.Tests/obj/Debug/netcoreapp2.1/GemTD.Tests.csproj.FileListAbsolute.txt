@@ -1,0 +1,17 @@
+C:\Users\Zachari\Desktop\Dev\GemTD\test\GemTD.Tests\bin\Debug\netcoreapp2.1\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\Users\Zachari\Desktop\Dev\GemTD\test\GemTD.Tests\bin\Debug\netcoreapp2.1\xunit.runner.reporters.netcoreapp10.dll
+C:\Users\Zachari\Desktop\Dev\GemTD\test\GemTD.Tests\bin\Debug\netcoreapp2.1\xunit.runner.utility.netcoreapp10.dll
+C:\Users\Zachari\Desktop\Dev\GemTD\test\GemTD.Tests\bin\Debug\netcoreapp2.1\GemTD.Tests.deps.json
+C:\Users\Zachari\Desktop\Dev\GemTD\test\GemTD.Tests\bin\Debug\netcoreapp2.1\GemTD.Tests.runtimeconfig.json
+C:\Users\Zachari\Desktop\Dev\GemTD\test\GemTD.Tests\bin\Debug\netcoreapp2.1\GemTD.Tests.runtimeconfig.dev.json
+C:\Users\Zachari\Desktop\Dev\GemTD\test\GemTD.Tests\bin\Debug\netcoreapp2.1\GemTD.Tests.dll
+C:\Users\Zachari\Desktop\Dev\GemTD\test\GemTD.Tests\bin\Debug\netcoreapp2.1\GemTD.Tests.pdb
+C:\Users\Zachari\Desktop\Dev\GemTD\test\GemTD.Tests\bin\Debug\netcoreapp2.1\GemTD.dll
+C:\Users\Zachari\Desktop\Dev\GemTD\test\GemTD.Tests\bin\Debug\netcoreapp2.1\GemTD.pdb
+C:\Users\Zachari\Desktop\Dev\GemTD\test\GemTD.Tests\obj\Debug\netcoreapp2.1\GemTD.Tests.csprojAssemblyReference.cache
+C:\Users\Zachari\Desktop\Dev\GemTD\test\GemTD.Tests\obj\Debug\netcoreapp2.1\GemTD.Tests.csproj.CoreCompileInputs.cache
+C:\Users\Zachari\Desktop\Dev\GemTD\test\GemTD.Tests\obj\Debug\netcoreapp2.1\GemTD.Tests.AssemblyInfoInputs.cache
+C:\Users\Zachari\Desktop\Dev\GemTD\test\GemTD.Tests\obj\Debug\netcoreapp2.1\GemTD.Tests.AssemblyInfo.cs
+C:\Users\Zachari\Desktop\Dev\GemTD\test\GemTD.Tests\obj\Debug\netcoreapp2.1\GemTD.Tests.csproj.CopyComplete
+C:\Users\Zachari\Desktop\Dev\GemTD\test\GemTD.Tests\obj\Debug\netcoreapp2.1\GemTD.Tests.dll
+C:\Users\Zachari\Desktop\Dev\GemTD\test\GemTD.Tests\obj\Debug\netcoreapp2.1\GemTD.Tests.pdb

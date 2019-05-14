@@ -1,0 +1,152 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Zachari\\Desktop\\Dev\\GemTD\\test\\GemTD.Tests\\GemTD.Tests.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Zachari\\Desktop\\Dev\\GemTD\\src\\GemTD\\GemTD.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Zachari\\Desktop\\Dev\\GemTD\\src\\GemTD\\GemTD.csproj",
+        "projectName": "GemTD",
+        "projectPath": "C:\\Users\\Zachari\\Desktop\\Dev\\GemTD\\src\\GemTD\\GemTD.csproj",
+        "packagesPath": "C:\\Users\\Zachari\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Zachari\\Desktop\\Dev\\GemTD\\src\\GemTD\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Zachari\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Amazon.Lambda.Core": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "Amazon.Lambda.Serialization.Json": {
+              "target": "Package",
+              "version": "[1.4.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[4.0.6, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Users\\Zachari\\Desktop\\Dev\\GemTD\\test\\GemTD.Tests\\GemTD.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Zachari\\Desktop\\Dev\\GemTD\\test\\GemTD.Tests\\GemTD.Tests.csproj",
+        "projectName": "GemTD.Tests",
+        "projectPath": "C:\\Users\\Zachari\\Desktop\\Dev\\GemTD\\test\\GemTD.Tests\\GemTD.Tests.csproj",
+        "packagesPath": "C:\\Users\\Zachari\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Zachari\\Desktop\\Dev\\GemTD\\test\\GemTD.Tests\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Zachari\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {
+              "C:\\Users\\Zachari\\Desktop\\Dev\\GemTD\\src\\GemTD\\GemTD.csproj": {
+                "projectPath": "C:\\Users\\Zachari\\Desktop\\Dev\\GemTD\\src\\GemTD\\GemTD.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Amazon.Lambda.Core": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "Amazon.Lambda.TestUtilities": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[15.5.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.10.1, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.3.1, )"
+            },
+            "xunit.runner.visualstudio": {
+              "target": "Package",
+              "version": "[2.3.1, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+using System.Web;
+
+namespace GemTD
+{
+    public class Helpers
+    {
+        public static string GetRDSConnectionString()
+        {
+            //   var appConfig = ConfigurationManager.AppSettings;
+
+            //   string dbname = appConfig["RDS_DB_NAME"];
+
+            //   if (string.IsNullOrEmpty(dbname)) return null;
+
+            //   string username = appConfig["RDS_USERNAME"];
+            //   string password = appConfig["RDS_PASSWORD"];
+            //   string hostname = appConfig["RDS_HOSTNAME"];
+            //   string port = appConfig["RDS_PORT"];
+
+            //   return "Data Source=" + hostname + ";Initial Catalog=" + dbname + ";User ID=" + username + ";Password=" + password + ";";
+            string hostname = "bold-data.cyxwx6wqtiak.us-east-1.rds.amazonaws.com";
+            string dbname = "gem_td";
+            string username = "thrasos";
+            string password = "Pow3rt3ch";
+            return $"Server={hostname};Port=9006;Database={dbname};User ID={username};Password={password};";
+        }
+    }
+}
