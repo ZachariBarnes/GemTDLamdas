@@ -12,6 +12,7 @@ namespace GemTD
             score = Score;
             wave = Wave;
             gameMode = Game_Mode;
+            userName = uname;
             if (userID != 0 && uname.Equals(""))
                 LookupUser();
         }

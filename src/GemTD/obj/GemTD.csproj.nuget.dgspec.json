@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Zachari\\Desktop\\Dev\\GemTD\\src\\GemTD\\GemTD.csproj": {}
+    "C:\\Users\\Zachari\\Desktop\\Dev\\GemTowerDefense\\src\\GemTD\\GemTD.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Zachari\\Desktop\\Dev\\GemTD\\src\\GemTD\\GemTD.csproj": {
+    "C:\\Users\\Zachari\\Desktop\\Dev\\GemTowerDefense\\src\\GemTD\\GemTD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Zachari\\Desktop\\Dev\\GemTD\\src\\GemTD\\GemTD.csproj",
+        "projectUniqueName": "C:\\Users\\Zachari\\Desktop\\Dev\\GemTowerDefense\\src\\GemTD\\GemTD.csproj",
         "projectName": "GemTD",
-        "projectPath": "C:\\Users\\Zachari\\Desktop\\Dev\\GemTD\\src\\GemTD\\GemTD.csproj",
+        "projectPath": "C:\\Users\\Zachari\\Desktop\\Dev\\GemTowerDefense\\src\\GemTD\\GemTD.csproj",
         "packagesPath": "C:\\Users\\Zachari\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Zachari\\Desktop\\Dev\\GemTD\\src\\GemTD\\obj\\",
+        "outputPath": "C:\\Users\\Zachari\\Desktop\\Dev\\GemTowerDefense\\src\\GemTD\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
