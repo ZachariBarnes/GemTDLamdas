@@ -293,7 +293,7 @@ namespace GemTD
                 while (dr.Read())
                 {
                     // //Console.WriteLine($"Db read:{dr}");
-                    // Console.Write($"Score Found, Pts:{dr[1]}, Wave:{dr[2]}, Mode:{dr[3]}, User:{dr[4]}");
+                    Console.Write($"Score Found, Pts:{dr[1]}, Wave:{dr[2]}, Mode:{dr[3]}, User:{dr[4]}");
                     topScores.Add(new Score(int.Parse(dr[0].ToString()), int.Parse(dr[1].ToString()), int.Parse(dr[2].ToString()), dr[3].ToString(), dr[4].ToString()));
                 }
                 dr.Close();
