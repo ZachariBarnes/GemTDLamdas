@@ -176,7 +176,7 @@ namespace GemTD
                             int limit = request.score.limit;
                             // Console.WriteLine($"Score: {request.score}, offset: {offset}, Limit: {limit}");
                             List<Score> results = await DbUtils.FetchScores(offset, limit);
-                            Console.WriteLine("Score Read Results: {0}", results);
+                            Console.WriteLine("Score Read Results: {0}", JsonConvert.SerializeObject(results));
     
                             response.body = JsonConvert.SerializeObject(results);
                         }
