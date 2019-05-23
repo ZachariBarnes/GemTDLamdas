@@ -124,7 +124,10 @@ namespace GemTD
                             response.status = "Success";
                             response.message = $"Successfully logged in as user: {loginUser.userName}";
                             loginUser.Password=null;
-                            response.body = response.body = JsonConvert.SerializeObject(loginUser);
+                            loginUser.Salt=null;
+                            JsonSerializerSettings ignoreNull = new JsonSerializerSettings();
+                            ignoreNull.NullValueHandling=NullValueHandling.Ignore;
+                            response.body = response.body = JsonConvert.SerializeObject(loginUser, ignoreNull);
                         }
                         else
                         {
