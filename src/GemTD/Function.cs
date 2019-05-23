@@ -111,7 +111,9 @@ namespace GemTD
                 case login:
                     {
                         // Console.WriteLine($"Login user:{requestUser.userID}");
-                        User loginUser = await DbUtils.FetchUser(requestUser.userID);
+	                    User reqUser = new User(0, userName);
+                        User loginUser = await DbUtils.FindUserByUserName(reqUser);
+                        Console.WriteLine(JObject.FromObject(loginUser));
                         string salt = loginUser.Salt;
                         string pw = User.CalculatePassword(password, salt);
                         // Console.WriteLine($"given pass {pw}");

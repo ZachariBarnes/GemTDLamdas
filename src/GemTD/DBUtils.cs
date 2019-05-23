@@ -102,11 +102,24 @@ namespace GemTD
 
                 NpgsqlCommand cmd = new NpgsqlCommand(sql, db);
                 cmd.Parameters.AddWithValue("username", ExisitngUser.userName);
-                NpgsqlDataReader dr = cmd.ExecuteReader();
+                 NpgsqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
                 {
-                    Console.Write("{0}\t{1} \n", dr[0], dr[1]);
+                    // //Console.WriteLine($"Db read:{dr}");
+                    // Console.Write("{0}\t{1} \n", dr[0], dr[1]);
                     myUser = new User(int.Parse(dr[0].ToString()), dr[1].ToString(), dr[2].ToString(), dr[3].ToString());
+                    myUser.Password = dr[4].ToString();
+                    dr.Close();
+                    if (myUser.userID > 0)
+                    {
+                        string saltSql = "SELECT salt FROM public.salt where userid = :uID";
+                        NpgsqlCommand saltCmd = new NpgsqlCommand(saltSql, db);
+                        saltCmd.Parameters.AddWithValue("uID", myUser.userID);
+                        NpgsqlDataReader dr2 = saltCmd.ExecuteReader();
+                        if (dr2.Read())
+                            myUser.Salt = dr2[0].ToString();
+                        dr2.Close();
+                    }
                 }
                 else
                 {
