@@ -60,7 +60,11 @@ namespace GemTD
                         {
                             User results = await DbUtils.FetchUser(userId);
                             Console.WriteLine("Results: {0}", results);
-                            response.body = JsonConvert.SerializeObject(results);
+                            results.Password = null;
+                            results.Salt = null;
+                            JsonSerializerSettings ignoreNull = new JsonSerializerSettings();
+                            ignoreNull.NullValueHandling = NullValueHandling.Ignore;
+                            response.body = JsonConvert.SerializeObject(results, ignoreNull);
                         }
                         else
                         {
@@ -111,7 +115,7 @@ namespace GemTD
                 case login:
                     {
                         // Console.WriteLine($"Login user:{requestUser.userID}");
-	                    User reqUser = new User(0, userName);
+                        User reqUser = new User(0, userName);
                         User loginUser = await DbUtils.FindUserByUserName(reqUser);
                         Console.WriteLine(JObject.FromObject(loginUser));
                         string salt = loginUser.Salt;
@@ -123,10 +127,10 @@ namespace GemTD
                         {
                             response.status = "Success";
                             response.message = $"Successfully logged in as user: {loginUser.userName}";
-                            loginUser.Password=null;
-                            loginUser.Salt=null;
+                            loginUser.Password = null;
+                            loginUser.Salt = null;
                             JsonSerializerSettings ignoreNull = new JsonSerializerSettings();
-                            ignoreNull.NullValueHandling=NullValueHandling.Ignore;
+                            ignoreNull.NullValueHandling = NullValueHandling.Ignore;
                             response.body = response.body = JsonConvert.SerializeObject(loginUser, ignoreNull);
                         }
                         else
@@ -183,7 +187,7 @@ namespace GemTD
                             // Console.WriteLine($"Score: {request.score}, offset: {offset}, Limit: {limit}");
                             List<Score> results = await DbUtils.FetchScores(offset, limit);
                             Console.WriteLine("Score Read Results: {0}", JsonConvert.SerializeObject(results));
-    
+
                             response.body = JsonConvert.SerializeObject(results);
                         }
                         else
