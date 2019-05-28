@@ -43,7 +43,7 @@ namespace GemTD
             string userName = request.user.username;
             string name = request.user.name;
             string email = request.user.email;
-            string password = request.user.password;
+            string password = request.user.password ?? "";
             // Console.WriteLine($"Username Variable!: {userName}");
             User requestUser = new User(userId, userName, name, email, password);
             Response response = new Response();
