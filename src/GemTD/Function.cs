@@ -45,7 +45,7 @@ namespace GemTD
             string email = request.user.email;
             string password = request.user.password;
             // Console.WriteLine($"Username Variable!: {userName}");
-            User requestUser = new User(userId, userName, name, email);
+            User requestUser = new User(userId, userName, name, email, password);
             Response response = new Response();
             // Console.WriteLine("The Action is: {0}", action);
             response.status = "Success";
