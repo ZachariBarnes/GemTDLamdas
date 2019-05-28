@@ -88,7 +88,7 @@ namespace GemTD
                         // Console.WriteLine("Generating hash");
                         // requestUser.GeneratePassword(password);
                         // Console.WriteLine("Generated hash");
-                        dynamic results = await DbUtils.CreateUser(requestUser);
+                        int results = await DbUtils.CreateUser(requestUser);
 
                         if (results == 0)
                         {
@@ -98,9 +98,10 @@ namespace GemTD
                         }
                         else
                         {
-                            requestUser.userID = results;
-                            response.body = JsonConvert.SerializeObject(results);
-                            Console.WriteLine("Results: {0}", results);
+                            User createdUser =  await DbUtils.FetchUser(results);
+                            JsonSerializerSettings ignoreNull = new JsonSerializerSettings();
+                            ignoreNull.NullValueHandling = NullValueHandling.Ignore;
+                            response.body = JsonConvert.SerializeObject(createdUser, ignoreNull);
                         }
                         break;
                     }
