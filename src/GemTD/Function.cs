@@ -98,7 +98,9 @@ namespace GemTD
                         }
                         else
                         {
-                            User createdUser =  await DbUtils.FetchUser(results);
+                            User createdUser = await DbUtils.FetchUser(results);
+                            createdUser.Password = null;
+                            createdUser.Salt = null;
                             JsonSerializerSettings ignoreNull = new JsonSerializerSettings();
                             ignoreNull.NullValueHandling = NullValueHandling.Ignore;
                             response.body = JsonConvert.SerializeObject(createdUser, ignoreNull);
