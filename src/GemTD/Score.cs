@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace GemTD
 {
@@ -13,8 +14,7 @@ namespace GemTD
             wave = Wave;
             gameMode = Game_Mode;
             userName = uname;
-            if (userID != 0 && uname.Equals(""))
-                LookupUser();
+
         }
         public int scoreID;
         public int userID;
@@ -24,11 +24,16 @@ namespace GemTD
         public string userName;
         public string error;
 
-        public async void LookupUser()
+        public async Task<string> LookupUser()
         {
-            DBUtils database = new DBUtils();
-            User user = await database.FetchUser(userID);
-            userName = user.userName;
+            if (userID != 0 && userName.Equals(""))
+            {
+                DBUtils database = new DBUtils();
+                User user = await database.FetchUser(userID);
+                userName = user.userName;
+                return userName;
+            }
+            return "Error:NoUserId";
         }
         private (string, int, int, string) ReturnUserData()
         {

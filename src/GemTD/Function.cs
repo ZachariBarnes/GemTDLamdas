@@ -20,7 +20,7 @@ namespace GemTD
         private const string create = "create";
         private const string read = "read";
         private const string login = "login";
-
+        private const string scoresByUser = "scoresByUser";
 
         /// <summary>
         /// Handles the Creation, updates and reading of Users and Highscores
@@ -201,6 +201,28 @@ namespace GemTD
                         }
                         break;
                     }
+                case scoresByUser:
+                    {
+                        bool userProvided = userId > 0;
+                        bool scoreProvided = request.score != null;
+                        if (scoreProvided && userProvided )
+                        {
+                            int offset = request.score.offset ?? 0;
+                            int limit = request.score.limit ?? 10;
+                            Console.WriteLine($"Score: {request.score}, offset: {offset}, Limit: {limit}");
+                            List<Score> results = await DbUtils.FetchScoresByUser(offset, limit, userId);
+                            Console.WriteLine("Score Read Results: {0}", JsonConvert.SerializeObject(results));
+
+                            response.body = JsonConvert.SerializeObject(results);
+                        }
+                        else
+                        {
+                            response.status = "Failure";
+                            response.message = "Missing or Invalid Parameters";
+                            response.body = "Score.offset and/or Score.Limit invalid or missing";
+                        }
+                        break;
+                    }
                 case create:
                     {
                         if (userId > 0)
@@ -212,12 +234,22 @@ namespace GemTD
                                 int newScore = int.Parse(request.score.score.ToString());
                                 int newWave = int.Parse(request.score.wave.ToString());
                                 Score thisScore = new Score(userId, newScore, newWave, request.score.gameMode.ToString());
-                                if (thisScore.userName != null && thisScore.score != 0 && thisScore.wave != 0)
+                                string username = await thisScore.LookupUser();
+                                bool validUser = username != null && !username.Contains("Error:NoUserId");
+                                bool validScore = thisScore.score != 0 && thisScore.wave != 0;
+                                Console.WriteLine($"Score: {JsonConvert.SerializeObject(thisScore)}, userName:{username}, ValidScore: {validScore}, ValidUser:{validUser}");
+                                if (validUser && validScore)
                                 {
                                     result = await DbUtils.InsertHighScore(thisScore);
                                     requestUser.userID = userId;
                                     response.body = JsonConvert.SerializeObject(result);
                                     Console.WriteLine("Results: {0}", result);
+                                }
+                                else
+                                {
+                                    response.status = "Failure";
+                                    response.message = "Missing or Invalid Parameters";
+                                    response.body = "User or Score Objects are missing or invalid";
                                 }
                             }
                         }

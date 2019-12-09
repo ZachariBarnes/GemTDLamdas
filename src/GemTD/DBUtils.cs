@@ -102,7 +102,7 @@ namespace GemTD
 
                 NpgsqlCommand cmd = new NpgsqlCommand(sql, db);
                 cmd.Parameters.AddWithValue("username", ExisitngUser.userName);
-                 NpgsqlDataReader dr = cmd.ExecuteReader();
+                NpgsqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
                 {
                     // //Console.WriteLine($"Db read:{dr}");
@@ -319,6 +319,44 @@ namespace GemTD
             {
                 //Console.WriteLine(msg.ToString());
                 throw;
+            }
+        }
+
+        public async Task<List<Score>> FetchScoresByUser(int offset = 0, int limit = 10, int userId = 0)
+        {
+            Console.WriteLine($"Fetching top 10 Scores");
+            try
+            {
+                List<Score> topScores = new List<Score>();
+                NpgsqlConnection db = CreateConnection();
+                string sql = "SELECT s.id, s.score, s.wave, s.game_mode, u.username " +
+                    "FROM public.highscores s " +
+                    "left outer join public.users u on u.id=s.user_id " +
+                    "where u.id = :userId " +
+                    "order by score desc limit :limit offset :offset";
+                await db.OpenAsync();
+                //Console.WriteLine("Connection Open");
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, db);
+                cmd.Parameters.AddWithValue("limit", limit);
+                cmd.Parameters.AddWithValue("offset", offset);
+                cmd.Parameters.AddWithValue("userId", userId);
+                NpgsqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    // //Console.WriteLine($"Db read:{dr}");
+                    Console.Write($"Score Found, Pts:{dr[1]}, Wave:{dr[2]}, Mode:{dr[3]}, User:{dr[4]}");
+                    topScores.Add(new Score(int.Parse(dr[0].ToString()), int.Parse(dr[1].ToString()), int.Parse(dr[2].ToString()), dr[3].ToString(), dr[4].ToString()));
+                }
+                dr.Close();
+                db.Close();
+                //Console.WriteLine("Connection Closed");
+                return topScores;
+
+            }
+            catch (Exception msg)
+            {
+                //Console.WriteLine(msg.ToString());
+                throw msg;
             }
         }
 
