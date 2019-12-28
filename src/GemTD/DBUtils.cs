@@ -252,7 +252,7 @@ namespace GemTD
             {
                 int userID = newScore.userID;
                 NpgsqlConnection db = CreateConnection();
-                string sql = "INSERT INTO public.highscores (user_id, game_mode, score, wave) VALUES(:uid, :gamemode, :score, :wave) returning *";
+                string sql = "INSERT INTO public.highscores (user_id, game_mode, score, wave, difficulty) VALUES(:uid, :gamemode, :score, :wave, :difficulty) returning *";
 
                 await db.OpenAsync();
                 //Console.WriteLine("Connection Open");
@@ -262,6 +262,7 @@ namespace GemTD
                 cmd.Parameters.AddWithValue("gamemode", newScore.gameMode);
                 cmd.Parameters.AddWithValue("score", newScore.score);
                 cmd.Parameters.AddWithValue("wave", newScore.wave);
+                cmd.Parameters.AddWithValue("difficulty", newScore.difficulty);
 
                 NpgsqlDataReader dr = cmd.ExecuteReader();
 
@@ -296,7 +297,7 @@ namespace GemTD
             {
                 List<Score> topScores = new List<Score>();
                 NpgsqlConnection db = CreateConnection();
-                string sql = "SELECT s.id, s.score, s.wave, s.game_mode, u.username FROM public.highscores s left outer join public.users u on u.id=s.user_id order by score desc limit :limit offset :offset";
+                string sql = "SELECT s.id, s.score, s.wave, s.game_mode, u.username, s.difficulty FROM public.highscores s left outer join public.users u on u.id=s.user_id order by score desc limit :limit offset :offset";
                 await db.OpenAsync();
                 //Console.WriteLine("Connection Open");
                 NpgsqlCommand cmd = new NpgsqlCommand(sql, db);
@@ -306,8 +307,8 @@ namespace GemTD
                 while (dr.Read())
                 {
                     // //Console.WriteLine($"Db read:{dr}");
-                    Console.Write($"Score Found, Pts:{dr[1]}, Wave:{dr[2]}, Mode:{dr[3]}, User:{dr[4]}");
-                    topScores.Add(new Score(int.Parse(dr[0].ToString()), int.Parse(dr[1].ToString()), int.Parse(dr[2].ToString()), dr[3].ToString(), dr[4].ToString()));
+                    Console.Write($"Score Found, Pts:{dr[1]}, Wave:{dr[2]}, Mode:{dr[3]}, User:{dr[4]}, Difficulty:{dr[5]}");
+                    topScores.Add(new Score(int.Parse(dr[0].ToString()), int.Parse(dr[1].ToString()), int.Parse(dr[2].ToString()), dr[3].ToString(), dr[4].ToString(), int.Parse(dr[5].ToString())));
                 }
                 dr.Close();
                 db.Close();
@@ -329,7 +330,7 @@ namespace GemTD
             {
                 List<Score> topScores = new List<Score>();
                 NpgsqlConnection db = CreateConnection();
-                string sql = "SELECT s.id, s.score, s.wave, s.game_mode, u.username " +
+                string sql = "SELECT s.id, s.score, s.wave, s.game_mode, u.username, s.difficulty " +
                     "FROM public.highscores s " +
                     "left outer join public.users u on u.id=s.user_id " +
                     "where u.id = :userId " +
@@ -344,8 +345,46 @@ namespace GemTD
                 while (dr.Read())
                 {
                     // //Console.WriteLine($"Db read:{dr}");
-                    Console.Write($"Score Found, Pts:{dr[1]}, Wave:{dr[2]}, Mode:{dr[3]}, User:{dr[4]}");
-                    topScores.Add(new Score(int.Parse(dr[0].ToString()), int.Parse(dr[1].ToString()), int.Parse(dr[2].ToString()), dr[3].ToString(), dr[4].ToString()));
+                    Console.Write($"Score Found, Pts:{dr[1]}, Wave:{dr[2]}, Mode:{dr[3]}, User:{dr[4]}, Difficulty:{dr[5]}");
+                    topScores.Add(new Score(int.Parse(dr[0].ToString()), int.Parse(dr[1].ToString()), int.Parse(dr[2].ToString()), dr[3].ToString(), dr[4].ToString(), int.Parse(dr[5].ToString())));
+                }
+                dr.Close();
+                db.Close();
+                //Console.WriteLine("Connection Closed");
+                return topScores;
+
+            }
+            catch (Exception msg)
+            {
+                //Console.WriteLine(msg.ToString());
+                throw msg;
+            }
+        }
+        public async Task<List<Score>> FetchScoresByUserDifficulty(int offset = 0, int limit = 10, int userId = 0, int diff = 1)
+        {
+            Console.WriteLine($"Fetching top 10 Scores");
+            try
+            {
+                List<Score> topScores = new List<Score>();
+                NpgsqlConnection db = CreateConnection();
+                string sql = "SELECT s.id, s.score, s.wave, s.game_mode, u.username, s.difficulty " +
+                    "FROM public.highscores s " +
+                    "left outer join public.users u on u.id=s.user_id " +
+                    "where u.id = :userId and u.difficulty = :difficulty" +
+                    "order by score desc limit :limit offset :offset";
+                await db.OpenAsync();
+                //Console.WriteLine("Connection Open");
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, db);
+                cmd.Parameters.AddWithValue("limit", limit);
+                cmd.Parameters.AddWithValue("offset", offset);
+                cmd.Parameters.AddWithValue("userId", userId);
+                cmd.Parameters.AddWithValue("difficulty", diff);
+                NpgsqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    // //Console.WriteLine($"Db read:{dr}");
+                    Console.Write($"Score Found, Pts:{dr[1]}, Wave:{dr[2]}, Mode:{dr[3]}, User:{dr[4]}, Difficulty:{dr[5]}");
+                    topScores.Add(new Score(int.Parse(dr[0].ToString()), int.Parse(dr[1].ToString()), int.Parse(dr[2].ToString()), dr[3].ToString(), dr[4].ToString(), int.Parse(dr[5].ToString())));
                 }
                 dr.Close();
                 db.Close();

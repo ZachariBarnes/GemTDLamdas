@@ -7,19 +7,20 @@ namespace GemTD
 {
     public class Score
     {
-        public Score(int Id, int Score, int Wave, string Game_Mode = "Classic", string uname = "")
+        public Score(int Id, int Score, int Wave, string Game_Mode = "Classic", string uname = "", int diff = 1)
         {
             userID = Id;
             score = Score;
             wave = Wave;
             gameMode = Game_Mode;
             userName = uname;
-
+            difficulty = diff;
         }
         public int scoreID;
         public int userID;
         public int score;
         public int wave;
+        public int difficulty;
         public string gameMode;
         public string userName;
         public string error;
@@ -35,9 +36,9 @@ namespace GemTD
             }
             return "Error:NoUserId";
         }
-        private (string, int, int, string) ReturnUserData()
+        private (string, int, int, string, int) ReturnUserData()
         {
-            return (userName, score, wave, gameMode);
+            return (userName, score, wave, gameMode, difficulty);
         }
     }
 }

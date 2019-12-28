@@ -233,7 +233,8 @@ namespace GemTD
                             {
                                 int newScore = int.Parse(request.score.score.ToString());
                                 int newWave = int.Parse(request.score.wave.ToString());
-                                Score thisScore = new Score(userId, newScore, newWave, request.score.gameMode.ToString());
+                                int diff = int.Parse(request.score.difficulty.ToString());
+                                Score thisScore = new Score(userId, newScore, newWave, request.score.gameMode.ToString(), "", diff);
                                 string username = await thisScore.LookupUser();
                                 bool validUser = username != null && !username.Contains("Error:NoUserId");
                                 bool validScore = thisScore.score != 0 && thisScore.wave != 0;
