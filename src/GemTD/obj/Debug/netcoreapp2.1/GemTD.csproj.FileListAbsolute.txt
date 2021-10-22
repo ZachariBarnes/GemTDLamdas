@@ -9,3 +9,15 @@ C:\Users\Zachari\Desktop\Dev\GemTD\src\GemTD\obj\Debug\netcoreapp2.1\GemTD.Assem
 C:\Users\Zachari\Desktop\Dev\GemTD\src\GemTD\obj\Debug\netcoreapp2.1\GemTD.AssemblyInfo.cs
 C:\Users\Zachari\Desktop\Dev\GemTD\src\GemTD\obj\Debug\netcoreapp2.1\GemTD.dll
 C:\Users\Zachari\Desktop\Dev\GemTD\src\GemTD\obj\Debug\netcoreapp2.1\GemTD.pdb
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\bin\Debug\netcoreapp2.1\GemTD.deps.json
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\bin\Debug\netcoreapp2.1\GemTD.runtimeconfig.json
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\bin\Debug\netcoreapp2.1\GemTD.runtimeconfig.dev.json
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\bin\Debug\netcoreapp2.1\GemTD.dll
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\obj\Debug\netcoreapp2.1\GemTD.csprojAssemblyReference.cache
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\obj\Debug\netcoreapp2.1\GemTD.AssemblyInfoInputs.cache
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\obj\Debug\netcoreapp2.1\GemTD.AssemblyInfo.cs
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\obj\Debug\netcoreapp2.1\GemTD.genruntimeconfig.cache
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\bin\Debug\netcoreapp2.1\GemTD.pdb
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\obj\Debug\netcoreapp2.1\GemTD.csproj.CoreCompileInputs.cache
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\obj\Debug\netcoreapp2.1\GemTD.dll
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\obj\Debug\netcoreapp2.1\GemTD.pdb

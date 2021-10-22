@@ -27,6 +27,7 @@ namespace GemTD
         public string email;
         public string name;
         public string error;
+        public string newPassword;
         private string password;
         private string salt;
 

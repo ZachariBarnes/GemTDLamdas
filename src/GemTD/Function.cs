@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,8 @@ using Npgsql.Logging;
 using Amazon.Lambda.Core;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System.Buffers.Text;
+using System.Text;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
@@ -21,6 +24,7 @@ namespace GemTD
         private const string read = "read";
         private const string login = "login";
         private const string scoresByUser = "scoresByUser";
+        private const string submitBug = "submitBug";
 
         /// <summary>
         /// Handles the Creation, updates and reading of Users and Highscores
@@ -37,7 +41,6 @@ namespace GemTD
             dynamic requestJson = JObject.Parse(input.ToString());
             dynamic request = requestJson.data;
             string action = request.action;
-            Console.Write($"request.user: {request.user}");
             string tempUserID = request.user.userId ?? "";
             int userId = (string.IsNullOrEmpty(tempUserID)) ? 0 : int.Parse(tempUserID);
             string userName = request.user.username;
@@ -85,9 +88,6 @@ namespace GemTD
                             return JObject.FromObject(response);
                         }
                         requestUser.userID = new int();
-                        // Console.WriteLine("Generating hash");
-                        // requestUser.GeneratePassword(password);
-                        // Console.WriteLine("Generated hash");
                         int results = await DbUtils.CreateUser(requestUser);
 
                         if (results == 0)
@@ -109,10 +109,24 @@ namespace GemTD
                     }
                 case update:
                     {
-                        // Console.WriteLine($"Update Request User: {requestUser}");
-                        dynamic results = await DbUtils.UpdateUser(requestUser);
-                        response.body = JsonConvert.SerializeObject(results);
-                        Console.WriteLine("Results: {0}", results);
+                        string newPassword = request.user.newPassword ?? "";
+                        requestUser.newPassword = newPassword;
+                        User reqUser = new User(0, userName);
+                        User loginUser = await DbUtils.FindUserByUserName(reqUser);
+                        string salt = loginUser.Salt;
+                        string pw = User.CalculatePassword(password, salt);
+                        if (pw == loginUser.Password)
+                        {
+                            dynamic results = await DbUtils.UpdateUser(requestUser);
+                            response.body = JsonConvert.SerializeObject(results);
+                            Console.WriteLine("Results: {0}", results);
+                        }
+                        else
+                        {
+                            response.status = "Failure";
+                            response.message = $"Login Failue for user {loginUser.userName}";
+                            response.body = "Username or password provided is invalid";
+                        }
                         break;
                     }
                 case login:
@@ -120,7 +134,7 @@ namespace GemTD
                         // Console.WriteLine($"Login user:{requestUser.userID}");
                         User reqUser = new User(0, userName);
                         User loginUser = await DbUtils.FindUserByUserName(reqUser);
-                        Console.WriteLine(JObject.FromObject(loginUser));
+                        //Console.WriteLine(JObject.FromObject(loginUser));
                         string salt = loginUser.Salt;
                         string pw = User.CalculatePassword(password, salt);
                         // Console.WriteLine($"given pass {pw}");
@@ -270,6 +284,44 @@ namespace GemTD
                         response.body = "Invalid request Parameters";
                         break;
                     }
+            }
+
+            return JObject.FromObject(response);
+        }
+
+        public virtual async Task<Object> BugReportRequestHandler(object input, ILambdaContext context)
+        {
+            dynamic requestJson = JObject.Parse(input.ToString());
+            dynamic request = requestJson.data;
+            string action = request.action;
+            Console.Write($"BugReport submitter: {request.user.userId}");
+            string tempUserID = request.user.userId ?? "";
+            int userId = (string.IsNullOrEmpty(tempUserID)) ? 0 : int.Parse(tempUserID);
+            string userName = request.user.username;
+            string name = request.user.name;
+            string email = request.user.email;
+            Response response = new Response();
+            response.status = "Success";
+            response.message = $"Called bugReport API with action {action} successfully";
+            response.body = "Invalid request Parameters";
+
+            switch (action)
+            {
+                case submitBug:
+                    {
+                        string logString = request.log;
+                        Console.WriteLine(JObject.FromObject(request));
+                        Console.WriteLine($"Log: {logString}");
+                        byte[] log = Convert.FromBase64String(logString);
+                        string logfile = Encoding.UTF8.GetString(log);
+                        Console.WriteLine(logfile.Substring(0, 100));
+                        string description = request.description;
+                        string title = request.title;
+                        bool SendMessageResponse = await Helpers.SendFeedbackSTMP(title, description, logfile, userName, email, name, userId.ToString());
+                        response.body = $"Successfully Sent Message: {SendMessageResponse}";
+                        break;
+                    }
+                default: break;
             }
 
             return JObject.FromObject(response);

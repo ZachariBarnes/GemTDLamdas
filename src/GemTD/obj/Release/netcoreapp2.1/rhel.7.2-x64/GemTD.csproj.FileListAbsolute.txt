@@ -30,3 +30,15 @@ C:\Users\Zachari\Dropbox\Projects\DotNetApps\GemTDLamdas\src\GemTD\obj\Release\n
 C:\Users\Zachari\Dropbox\Projects\DotNetApps\GemTDLamdas\src\GemTD\obj\Release\netcoreapp2.1\rhel.7.2-x64\GemTD.AssemblyInfo.cs
 C:\Users\Zachari\Dropbox\Projects\DotNetApps\GemTDLamdas\src\GemTD\obj\Release\netcoreapp2.1\rhel.7.2-x64\GemTD.dll
 C:\Users\Zachari\Dropbox\Projects\DotNetApps\GemTDLamdas\src\GemTD\obj\Release\netcoreapp2.1\rhel.7.2-x64\GemTD.pdb
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\bin\Release\netcoreapp2.1\rhel.7.2-x64\GemTD.deps.json
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\bin\Release\netcoreapp2.1\rhel.7.2-x64\GemTD.runtimeconfig.json
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\bin\Release\netcoreapp2.1\rhel.7.2-x64\GemTD.runtimeconfig.dev.json
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\bin\Release\netcoreapp2.1\rhel.7.2-x64\GemTD.dll
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\bin\Release\netcoreapp2.1\rhel.7.2-x64\GemTD.pdb
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\obj\Release\netcoreapp2.1\rhel.7.2-x64\GemTD.csprojAssemblyReference.cache
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\obj\Release\netcoreapp2.1\rhel.7.2-x64\GemTD.csproj.CoreCompileInputs.cache
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\obj\Release\netcoreapp2.1\rhel.7.2-x64\GemTD.AssemblyInfoInputs.cache
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\obj\Release\netcoreapp2.1\rhel.7.2-x64\GemTD.AssemblyInfo.cs
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\obj\Release\netcoreapp2.1\rhel.7.2-x64\GemTD.dll
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\obj\Release\netcoreapp2.1\rhel.7.2-x64\GemTD.pdb
+C:\Users\sabin\Documents\Projects\C#\GemTDLamdas\src\GemTD\obj\Release\netcoreapp2.1\rhel.7.2-x64\GemTD.genruntimeconfig.cache

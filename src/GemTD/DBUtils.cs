@@ -77,7 +77,7 @@ namespace GemTD
             }
             catch (Exception msg)
             {
-                //Console.WriteLine(msg.ToString());
+                Console.WriteLine(msg.ToString());
                 throw;
             }
         }
@@ -135,26 +135,30 @@ namespace GemTD
             }
             catch (Exception msg)
             {
-                //Console.WriteLine(msg.ToString());
+                Console.WriteLine(msg.ToString());
                 throw;
             }
         }
         public async Task<Object> UpdateUser(User UpdateUser)
         {
-            User oldUser = new User(0, null);
-            User newUser = new User(0, null);
+
             try
             {
                 int UserID = UpdateUser.userID;
                 //Console.WriteLine($"UserID before Lookup: {UserID}, UpdatedUser: {UpdateUser}");
-                oldUser = await FetchUser(UserID);
+                User oldUser = await FetchUser(UserID);
+                User newUser = new User(0, null);
 
+                if (!string.IsNullOrEmpty(UpdateUser.newPassword)) {
+                    UpdateUser.GeneratePassword(UpdateUser.newPassword);
+                }
                 string userName = UpdateUser.userName ?? oldUser.userName;
                 string name = UpdateUser.name ?? oldUser.name;
                 string email = UpdateUser.email ?? oldUser.email;
-
+                string password = UpdateUser.Password ?? oldUser.Password;
+                string salt = UpdateUser.Salt ?? oldUser.Salt;
                 NpgsqlConnection db = CreateConnection();
-                string sql = $"Update public.users SET username= :uname, name= :realname, email= :emailname where id = :uid returning *";
+                string sql = $"Update public.users SET username= :uname, name= :realname, email= :emailname, password= :pw where id = :uid returning *";
 
                 await db.OpenAsync();
                 //Console.WriteLine("Connection Open");
@@ -164,8 +168,8 @@ namespace GemTD
                 cmd.Parameters.AddWithValue("uname", userName);
                 cmd.Parameters.AddWithValue("realname", name);
                 cmd.Parameters.AddWithValue("emailname", email);
+                cmd.Parameters.AddWithValue("pw", password);
                 cmd.Parameters.AddWithValue("uid", UserID);
-
                 NpgsqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
                 {
@@ -175,18 +179,23 @@ namespace GemTD
                 }
                 else
                 {
-                    //Console.WriteLine("Failed to Update User");
+                    Console.WriteLine("Failed to Update User");
                 }
-
                 dr.Close();
+                string saltSql = "UPDATE public.salt SET salt= :slt WHERE userid= :uid returning *";
+                NpgsqlCommand saltCmd = new NpgsqlCommand(saltSql, db);
+                saltCmd.Parameters.AddWithValue("slt", salt);
+                saltCmd.Parameters.AddWithValue("uid", UserID);
+                NpgsqlDataReader dr2 = saltCmd.ExecuteReader();
+                dr2.Close();
                 db.Close();
-                //Console.WriteLine("Connection Closed");
+                Console.WriteLine("Connection Closed");
                 return newUser;
 
             }
             catch (Exception msg)
             {
-                //Console.WriteLine(msg.ToString());
+                Console.WriteLine(msg.ToString());
                 throw;
             }
         }
@@ -241,7 +250,7 @@ namespace GemTD
             }
             catch (Exception msg)
             {
-                //Console.WriteLine(msg.ToString());
+                Console.WriteLine(msg.ToString());
                 throw;
             }
         }
@@ -285,7 +294,7 @@ namespace GemTD
             }
             catch (Exception msg)
             {
-                //Console.WriteLine(msg.ToString());
+                Console.WriteLine(msg.ToString());
                 throw;
             }
         }
@@ -318,7 +327,7 @@ namespace GemTD
             }
             catch (Exception msg)
             {
-                //Console.WriteLine(msg.ToString());
+                Console.WriteLine(msg.ToString());
                 throw;
             }
         }
